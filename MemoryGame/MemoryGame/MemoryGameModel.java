@@ -43,15 +43,6 @@ class MemoryGameModel {
         return gameDuration;
     }
 
-    public MemoryGame() {
-        tiles = new ArrayList<>();
-        matchesFound = 0;
-        flipsRemaining = 2; // Set the number of allowed flips per turn
-        playerScore = 0;
-        secondsElapsed = 0;
-        gameDuration = 60; // Set the game duration in seconds
-    }
-
     public void startGame() {
         // Start the timer
 

@@ -8,8 +8,16 @@ interface MemoryGameView {
     public void gameOver();
 
     /**
-     * Prompt user to enter tile number, quit, or restart
+     * Display a success message at end of game, if user
+     * found all matches
+     * @param playerScore Final player score
+     * @param secondsElapsed Final seconds elapsed
      */
+    public void successGameOver(int playerScore, int secondsElapsed);
+
+        /**
+         * Prompt user to enter tile number, quit, or restart
+         */
     public String prompt();
 
     /**

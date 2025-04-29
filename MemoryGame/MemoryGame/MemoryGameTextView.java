@@ -15,6 +15,13 @@ class MemoryGameTextView implements MemoryGameView {
         return;
     }
 
+    public void successGameOver(int playerScore, int secondsElapsed){
+        System.out.println("Congratulations! You found all the matches.");
+        System.out.println("Your final score: " + playerScore);
+        System.out.println("Time elapsed: " + secondsElapsed + " seconds");
+    }
+
+
     @Override
     public String prompt() {
         System.out.println("Enter the tile number to flip, "

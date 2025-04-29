@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public class Main {
     public static void main(String[] args) {
-        MemoryGame game = new MemoryGameController();
+        MemoryGameController game = new MemoryGameController();
         game.initializeTiles(6); // Change the number of pairs as per your preference
         game.play();
     }

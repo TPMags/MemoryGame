@@ -116,9 +116,8 @@ class MemoryGameModel {
                 }
             }
         }
-        System.out.println("Congratulations! You found all the matches.");
-        System.out.println("Your final score: " + playerScore);
-        System.out.println("Time elapsed: " + secondsElapsed + " seconds");
+
+
         endGame();
         scanner.close();
     }

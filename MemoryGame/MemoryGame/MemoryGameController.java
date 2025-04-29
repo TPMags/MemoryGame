@@ -56,5 +56,7 @@ class MemoryGameController {
             }
         }
 
+        _view.successGameOver();
+
     }
 }

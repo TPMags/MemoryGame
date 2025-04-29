@@ -6,12 +6,23 @@ class MemoryGameController {
     private static MemoryGameView _view;
     private static MemoryGameModel _model;
     private static Timer timer;
+    /**
+     * The time used (out of game duration)
+     */
+    private int secondsElapsed;
+    /**
+     * The total time the user has to find matches
+     */
+    private int gameDuration;
 
     MemoryGameController() {
         _view = new MemoryGameTextView();
         _model = new MemoryGameModel();
 
         _model.initializeTiles(6);
+
+        secondsElapsed = 0;
+        gameDuration = 60;
     }
 
     public void play() {

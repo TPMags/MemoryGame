@@ -30,6 +30,9 @@ class MemoryGameController {
         while (_model.getMatchesFound() < _model.getTilesSize() / 2) {
             _view.displayBoard(_model.getTiles());
             String input = _view.prompt();
+
+
+
             if (input.equalsIgnoreCase("q")) {
                 // Quits the program
                 _view.quitGame();

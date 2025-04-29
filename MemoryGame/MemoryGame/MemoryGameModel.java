@@ -86,7 +86,8 @@ class MemoryGameModel {
             int tileIndex;
 
             // Check validity
-            try {
+
+            try { // THIS GOES IN THE VIEW
                 tileIndex = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a tile number.");

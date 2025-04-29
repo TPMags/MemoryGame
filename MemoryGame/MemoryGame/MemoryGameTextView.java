@@ -27,6 +27,7 @@ class MemoryGameTextView implements MemoryGameView {
         System.out.println("Enter the tile number to flip, "
                 + "'q' to quit, or 'r' to restart: ");
         String input = scanner.nextLine();
+
         return input;
     }
 

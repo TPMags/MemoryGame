@@ -22,52 +22,53 @@ class MemoryGameModel {
     public int getMatchesFound() {
         return matchesFound;
     }
-    //-----------------------------------------------------------------------------------------------------------------------------
+}
+//-----------------------------------------------------------------------------------------------------------------------------
 
-    public void play() {
-        Scanner scanner = new Scanner(System.in);
+    // public void play() {
+    //     Scanner scanner = new Scanner(System.in);
 
-        while (matchesFound < tiles.size() / 2) {
+    //     while (matchesFound < tiles.size() / 2) {
 
-            int tileIndex;
+    //         int tileIndex;
 
-            // Check validity
+    //         // Check validity
 
-            try { // THIS GOES IN THE VIEW
-                tileIndex = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a tile number.");
-                continue;
-            }
-            if (tileIndex < 0 || tileIndex >= tiles.size()) {
-                System.out.println("Invalid tile number. Please enter a valid tile number.");
-                continue;
-            }
+    //         try { // THIS GOES IN THE VIEW
+    //             tileIndex = Integer.parseInt(input);
+    //         } catch (NumberFormatException e) {
+    //             System.out.println("Invalid input. Please enter a tile number.");
+    //             continue;
+    //         }
+    //         if (tileIndex < 0 || tileIndex >= tiles.size()) {
+    //             System.out.println("Invalid tile number. Please enter a valid tile number.");
+    //             continue;
+    //         }
 
-            Tile tile = tiles.get(tileIndex);
-            if (tile.isFlipped()) {
-                System.out.println("Tile already flipped. Try again.");
-            } else {
-                tile.setFlipped(true);
-                flipsRemaining--;
-                if (checkForMatch(tile)) {
-                    System.out.println("Match found!");
-                    matchesFound++;
-                    playerScore++;
-                } else if (flipsRemaining == 0) {
-                    System.out.println("No match. Out of flips. Next turn.");
-                    resetFlippedTiles();
-                    flipsRemaining = 2; // Reset the flips remaining for the next turn
-                } else {
-                    System.out.println("No match. Try again.");
-                }
-            }
-        }
+    //         Tile tile = tiles.get(tileIndex);
+    //         if (tile.isFlipped()) {
+    //             System.out.println("Tile already flipped. Try again.");
+    //         } else {
+    //             tile.setFlipped(true);
+    //             flipsRemaining--;
+    //             if (checkForMatch(tile)) {
+    //                 System.out.println("Match found!");
+    //                 matchesFound++;
+    //                 playerScore++;
+    //             } else if (flipsRemaining == 0) {
+    //                 System.out.println("No match. Out of flips. Next turn.");
+    //                 resetFlippedTiles();
+    //                 flipsRemaining = 2; // Reset the flips remaining for the next turn
+    //             } else {
+    //                 System.out.println("No match. Try again.");
+    //             }
+    //         }
+    //     }
 
 
-        endGame();
-        scanner.close();
-    }
+    //     endGame();
+    //     scanner.close();
+    // }
 
     /**
      * See if there's another tile with the same symbol
@@ -75,24 +76,24 @@ class MemoryGameModel {
      * @param tile Reference title
      * @return True if found match, false otherwise
      */
-    private boolean checkForMatch(Tile tile) {
-        int count = 0;
-        for (Tile t : tiles) {
-            if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
-                count++;
-            }
-        }
-        return count == 2;
-    }
+//     private boolean checkForMatch(Tile tile) {
+//         int count = 0;
+//         for (Tile t : tiles) {
+//             if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
+//                 count++;
+//             }
+//         }
+//         return count == 2;
+//     }
 
-    /**
-     * Unflips all tiles in the game.
-     */
-    private void resetFlippedTiles() {
-        for (Tile tile : tiles) {
-            if (tile.isFlipped()) {
-                tile.setFlipped(false);
-            }
-        }
-    }
-}
+//     /**
+//      * Unflips all tiles in the game.
+//      */
+//     private void resetFlippedTiles() {
+//         for (Tile tile : tiles) {
+//             if (tile.isFlipped()) {
+//                 tile.setFlipped(false);
+//             }
+//         }
+//     }
+// }

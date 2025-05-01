@@ -1,14 +1,8 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main {
     public static void main(String[] args) {
-        MemoryGameController game = new MemoryGameController();
-        game.initializeTiles(6); // Change the number of pairs as per your preference
-        game.play();
+        MemoryGameModel model = new MemoryGameModel();
+        MemoryGameView view = new MemoryGameTextView();
+        MemoryGameController controller = new MemoryGameController(model, view);
     }
 }

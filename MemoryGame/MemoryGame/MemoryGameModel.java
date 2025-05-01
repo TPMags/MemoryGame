@@ -1,87 +1,33 @@
 import java.util.*;
 
 class MemoryGameModel {
-    private List<Tile> tiles;
-
-    public List<Tile> getTiles() {
-        return clone(tiles);
-    }
-
-    public int getTilesSize() {
-        return tiles.size();
-    }
-
-    /**
-     * The number of matches that the player has found.
-     * When == tiles.size()/2, main loop exits.
-     */
+    private int flipsRemaining;
+    private int playerScore;
+    // The number of matches that the player has found.
+    // When == tiles.size()/2, main loop exits.
     private int matchesFound;
+
+    public void resetFlips() {
+        flipsRemaining = 2;
+    }
+
+    public void resetScore() {
+        playerScore = 0;
+    }
+
+    public void resetMatches() {
+        matchesFound = 0;
+    }
 
     public int getMatchesFound() {
         return matchesFound;
     }
-
-    private int flipsRemaining;
-    private int playerScore;
-    private Timer timer;
-    /**
-     * The time used (out of game duration)
-     */
-    private int secondsElapsed;
-
-    public int getSecondsElapsed() {
-        return secondsElapsed;
-    }
-
-    /**
-     * The total time the user has to find matches
-     */
-    private int gameDuration;
-
-
-    public int getGameDuration() {
-        return gameDuration;
-    }
-
-    public void startGame() {
-        // Start the timer
-
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                secondsElapsed++;
-                if (secondsElapsed >= gameDuration) {
-                    _view.gameOver();
-                    endGame();
-                }
-            }
-        }, 1000, 1000);
-    }
-
-    public void endGame() {
-        timer.cancel();
-    }
-
-    /**
-     * Creates tile pairs with smybols increasing from A
-     * (i.e. A, A, B, B, C, C, ...)
-     *
-     * @param pairs Number of tiles to create
-     */
-    public void initializeTiles(int pairs) {
-        for (char symbol = 'A'; symbol < 'A' + pairs; symbol++) {
-            tiles.add(new Tile(symbol));
-            tiles.add(new Tile(symbol));
-        }
-        Collections.shuffle(tiles);
-    }
+    //-----------------------------------------------------------------------------------------------------------------------------
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
 
         while (matchesFound < tiles.size() / 2) {
-            displayBoard();
 
             int tileIndex;
 
@@ -148,17 +94,5 @@ class MemoryGameModel {
                 tile.setFlipped(false);
             }
         }
-    }
-
-    /**
-     * Resets game state and adds 6 tile pairs
-     */
-    private void restartGame() {
-        tiles.clear();
-        matchesFound = 0;
-        flipsRemaining = 2;
-        playerScore = 0;
-        secondsElapsed = 0;
-        initializeTiles(6); // Change the number of pairs as per your preference
     }
 }

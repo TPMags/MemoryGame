@@ -140,6 +140,7 @@ class MemoryGame {
         return count == 2;
     }
 
+    //  view
     private void displayBoard() {
         System.out.println("\n------- Memory Game -------");
         System.out.print("   ");

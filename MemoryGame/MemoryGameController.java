@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,11 +6,6 @@ class MemoryGameController {
     private static MemoryGameView view;
     private static MemoryGameModel model;
     private static Timer timer;
-    private List<Tile> tiles;
-    // The time used (out of game duration)
-    private int secondsElapsed;
-    // The total time the user has to find matches
-    private int gameDuration;
 
     /**
      * Constructer for the game controller
@@ -24,27 +16,6 @@ class MemoryGameController {
     public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
         this.model = model;
         this.view = view;
-
-        initializeTiles(6);
-
-        secondsElapsed = 0;
-        gameDuration = 60;
-    }
-
-    /**
-     * 
-     * @return Each tile
-     */
-    public List<Tile> getTiles() {
-        return clone(tiles);
-    }
-
-    /**
-     * 
-     * @return The amount of tiles
-     */
-    public int getTilesSize() {
-        return tiles.size();
     }
 
     /**
@@ -57,43 +28,13 @@ class MemoryGameController {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                secondsElapsed++;
-                if (secondsElapsed >= gameDuration) {
+                model.increaseSeconds();;
+                if (model.getElapsedTime() >= model.getGameDuration()) {
                     view.gameOver();
                     endGame();
                 }
             }
         }, 1000, 1000);
-    }
-
-    /**
-     * Creates tile pairs with smybols increasing from A
-     * (i.e. A, A, B, B, C, C, ...)
-     *
-     * @param pairs Number of tiles to create
-     */
-    public void initializeTiles(int pairs) {
-        for (char symbol = 'A'; symbol < 'A' + pairs; symbol++) {
-            tiles.add(new Tile(symbol));
-            tiles.add(new Tile(symbol));
-        }
-
-        // Makes sure that the tile matches aren't directly next to each other.
-        Collections.shuffle(tiles);
-    }
-
-    /**
-     * Resets game state and adds 6 tile pairs
-     */
-    private void restartGame() {
-        tiles.clear();
-        model.resetMatches();
-        model.resetFlips();
-        model.resetScore();
-        secondsElapsed = 0;
-
-        // Change the number of pairs as per your preference
-        initializeTiles(6); 
     }
 
     /**
@@ -104,21 +45,26 @@ class MemoryGameController {
     }
 
     /**
-     * Clones the tile list
-     *  
-     * @param tiles
-     * @return Copy of the tile list
+     * Resets game state and adds 6 tile pairs
      */
-    private List<Tile> clone(List<Tile> tiles) {
-        List<Tile> cloneList = new ArrayList<>();
-
-        for (int i = 0; i < tiles.size(); i++) {
-            cloneList.add(tiles.get(i));
-        }
-
-        return cloneList;
+    private void restartGame() {
+        timer.cancel();
+        model.resetGameState();
+        model.initializeTiles(6);
+        startTimer();
     }
-    //---------------------------------------------------------------------------------------------------------------------------------
+
+    private void startTimer() {
+        /* Todo */
+        return;
+    }
+
+    private void play() {
+        /* Todo */
+        return;
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
 
     // ** THIS NEEDS TO BE REFACTORED **
 
@@ -154,4 +100,4 @@ class MemoryGameController {
     //     }
     //     view.successGameOver();
     // } 
-}
+

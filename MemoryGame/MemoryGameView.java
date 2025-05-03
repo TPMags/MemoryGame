@@ -1,6 +1,12 @@
 import java.util.List;
 
 interface MemoryGameView {
+
+    /**
+     * Start the view
+     */
+    void start();
+
     /**
      * Display the board
      */
@@ -11,11 +17,11 @@ interface MemoryGameView {
      */
     String prompt();
 
-
     /**
      * Display a success message at end of game, if user
      * found all matches
-     * @param playerScore Final player score
+     *
+     * @param playerScore    Final player score
      * @param secondsElapsed Final seconds elapsed
      */
     void successGameOver(int playerScore, int secondsElapsed);
@@ -28,7 +34,8 @@ interface MemoryGameView {
 
     /**
      * Displays a message/prompt to the user
+     *
      * @param message Message to display
      */
     void displayMessage(String message);
- }
+}

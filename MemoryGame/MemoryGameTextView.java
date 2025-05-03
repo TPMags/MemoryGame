@@ -8,7 +8,11 @@ class MemoryGameTextView implements MemoryGameView {
     public MemoryGameTextView() {
         this.scanner = new Scanner(System.in);
     }
-    
+
+    @Override
+    public void start() {
+    }
+
     /**
      * Closes the scanner.
      */

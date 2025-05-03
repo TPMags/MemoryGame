@@ -3,15 +3,15 @@ import java.util.TimerTask;
 
 class MemoryGameController {
 
+    private static Timer timer;
     private final MemoryGameView view;
     private final MemoryGameModel model;
-    private static Timer timer;
 
     /**
      * Constructer for the game controller
-     * 
+     *
      * @param model model component that interacts with the controller
-     * @param view view component that interacts with the controller
+     * @param view  view component that interacts with the controller
      */
     public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
         this.model = model;
@@ -36,7 +36,7 @@ class MemoryGameController {
         startTimer();
     }
 
-    /** 
+    /**
      * Starts a 60 second timer.
      */
     private void startTimer() {

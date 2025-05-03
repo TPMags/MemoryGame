@@ -15,13 +15,7 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     @Override
-    public void gameOver() {
-        System.out.println("Time's up! Game over.");
-        
-    }
-
-    @Override
-    public void successGameOver(int playerScore, int secondsElapsed){
+    public void successGameOver(int playerScore, int secondsElapsed) {
         System.out.println("Congratulations! You found all the matches.");
         System.out.println("Your final score: " + playerScore);
         System.out.println("Time elapsed: " + secondsElapsed + " seconds");
@@ -32,45 +26,8 @@ class MemoryGameTextView implements MemoryGameView {
     public String prompt() {
         System.out.println("Enter the tile number to flip, "
                 + "'q' to quit, or 'r' to restart: ");
-        
-        String input = scanner.nextLine();
 
-        return input;
-    }
-
-    @Override
-    public void quitGame() {
-        System.out.println("Good Bye!");
-    }
-
-    @Override
-    public void restartGame() {
-        System.out.println("Restarting the game...");
-    }
-
-    @Override
-    public void invalidInput() {
-        System.out.println("Invalid input. Please enter a tile number.");
-    }
-
-    @Override
-    public void invalidNum() {
-        System.out.println("Invalid tile number. Please enter a valid tile number.");
-    }
-
-    @Override
-    public void invalidFlip() {
-        System.out.println("Tile already flipped. Try again.");
-    }
-
-    @Override
-    public void matchFound() {
-        System.out.println("Match found!");
-    }
-
-    @Override
-    public void noMatch() {
-        System.out.println("No match. Out of flips. Next turn.");
+        return scanner.nextLine();
     }
 
     @Override
@@ -94,5 +51,10 @@ class MemoryGameTextView implements MemoryGameView {
             }
         }
         System.out.println("\n---------------------------");
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        System.out.println(message);
     }
 }

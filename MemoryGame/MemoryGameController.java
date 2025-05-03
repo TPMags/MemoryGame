@@ -43,7 +43,7 @@ class MemoryGameController {
             public void run() {
                 model.increaseSeconds();
                 if (model.getElapsedTime() >= model.getGameDuration()) {
-                    view.gameOver();
+                    view.displayMessage("Time's up! Game over.");
                     endGame();
                 }
             }
@@ -57,39 +57,39 @@ class MemoryGameController {
             String input = view.prompt();
             if (input.equalsIgnoreCase("q")) {
                 // Quits the program
-                view.quitGame();
+                view.displayMessage("Good Bye!");
                 endGame();
                 return;
             } else if (input.equalsIgnoreCase("r")) {
                 // Resets game state, recreates timer, and continues
-                view.restartGame();
+                view.displayMessage("Restarting the game...");
                 restartGame();
             }
             int tileIndex;
             try {
                 tileIndex = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                view.invalidInput();
+                view.displayMessage("Invalid input. Please enter a tile number.");
                 continue;
             }
             if (tileIndex < 0 || tileIndex >= model.getNumberOfTiles()) {
-                view.invalidNum();
+                view.displayMessage("Invalid tile number. Please enter a valid tile number.");
                 continue;
             }
             if (model.getTile(tileIndex).isFlipped()) {
-                view.invalidFlip();
+                view.displayMessage("Tile already flipped. Try again.");
             } else {
                 model.flipTile(tileIndex);
                 if (model.checkForMatch()) {
-                    view.matchFound();
+                    view.displayMessage("Match found!");
                     model.increaseMatchesFound();
                     model.increasePlayerScore();
                 } else if (model.getFlipsRemaining() == 0) {
-                    view.noMatch();
+                    view.displayMessage("No match. Out of flips. Next turn.");
                     model.resetFlippedTiles();
                     model.resetFlips();
                 } else {
-                    view.noMatch();
+                    view.displayMessage("No match. Out of flips. Next turn.");
                 }
             }
         }

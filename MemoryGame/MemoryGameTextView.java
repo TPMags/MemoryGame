@@ -3,18 +3,24 @@ import java.util.Scanner;
 
 class MemoryGameTextView implements MemoryGameView {
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     MemoryGameTextView() {
         this.scanner = new Scanner(System.in);
     }
 
     @Override
-    public void gameOver() {
-        System.out.println("Time's up! Game over.");
-        return;
+    public void close() {
+        scanner.close();
     }
 
+    @Override
+    public void gameOver() {
+        System.out.println("Time's up! Game over.");
+        
+    }
+
+    @Override
     public void successGameOver(int playerScore, int secondsElapsed){
         System.out.println("Congratulations! You found all the matches.");
         System.out.println("Your final score: " + playerScore);
@@ -26,6 +32,7 @@ class MemoryGameTextView implements MemoryGameView {
     public String prompt() {
         System.out.println("Enter the tile number to flip, "
                 + "'q' to quit, or 'r' to restart: ");
+        
         String input = scanner.nextLine();
 
         return input;
@@ -33,15 +40,37 @@ class MemoryGameTextView implements MemoryGameView {
 
     @Override
     public void quitGame() {
-        // TODO Auto-generated method stub
-
+        System.out.println("Good Bye!");
     }
 
     @Override
     public void restartGame() {
         System.out.println("Restarting the game...");
-        return;
+    }
 
+    @Override
+    public void invalidInput() {
+        System.out.println("Invalid input. Please enter a tile number.");
+    }
+
+    @Override
+    public void invalidNum() {
+        System.out.println("Invalid tile number. Please enter a valid tile number.");
+    }
+
+    @Override
+    public void invalidFlip() {
+        System.out.println("Tile already flipped. Try again.");
+    }
+
+    @Override
+    public void matchFound() {
+        System.out.println("Match found!");
+    }
+
+    @Override
+    public void noMatch() {
+        System.out.println("No match. Out of flips. Next turn.");
     }
 
     @Override
@@ -66,5 +95,4 @@ class MemoryGameTextView implements MemoryGameView {
         }
         System.out.println("\n---------------------------");
     }
-
 }

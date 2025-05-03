@@ -34,4 +34,27 @@ interface MemoryGameView {
      */
     public void successGameOver(int playerScore, int secondsElapsed);
 
-}
+    /**
+     * Tells the user if an input is invalid
+     */
+    public void invalidInput();
+
+    /**
+     * Tells the user if an inputed number does not exist
+     */
+    public void invalidNum();
+
+    /**
+     * Tells if the tile is already flipped
+     */
+    public void invalidFlip();
+
+    /**
+     * closes input getter
+     */
+    public void close();
+
+    public void matchFound();
+
+    public void noMatch();
+ }

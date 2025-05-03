@@ -12,6 +12,15 @@ class MemoryGameModel {
     private int secondsElapsed;
     private int gameDuration;
 
+    public MemoryGameModel() {
+        this.tiles = new ArrayList<>();
+        this.flipsRemaining = 2;
+        this.playerScore = 0;
+        this.matchesFound = 0;
+        this.secondsElapsed = 0;
+        this.gameDuration = 60;
+    }
+
     /**
      * Creates tile pairs with smybols increasing from A
      * (i.e. A, A, B, B, C, C, ...)
@@ -19,6 +28,7 @@ class MemoryGameModel {
      * @param pairs Number of tiles to create
      */
     public void initializeTiles(int pairs) {
+        tiles.clear();
         for (char symbol = 'A'; symbol < 'A' + pairs; symbol++) {
             tiles.add(new Tile(symbol));
             tiles.add(new Tile(symbol));
@@ -47,6 +57,24 @@ class MemoryGameModel {
      */
     public List<Tile> getTiles() {
         return tiles;
+    }
+
+    public Tile getTile(int index) {
+        return tiles.get(index);
+    }
+
+    public int getNumberOfTiles() {
+        int toBeReturned = 0;
+        if (!tiles.isEmpty()) {
+            for (Tile tile : tiles) {
+                toBeReturned++;
+            }
+            return toBeReturned;
+        } else {
+            return 0;
+        }
+        
+        
     }
 
     /**
@@ -94,19 +122,24 @@ class MemoryGameModel {
         return playerScore; 
     }
 
+    public void increaseMatchesFound() {
+        matchesFound++;
+    }
+
+    public void increasePlayerScore() {
+        playerScore++;
+    }
+
     /**
      * Attempts to flip a tile at a specific index.
      * @param index tile index to flip.
-     * @return true if flipped, false if already flipped.
      */
-    public boolean flipTile(int index) {
+    public void flipTile(int index) {
         Tile tile = tiles.get(index);
         if (!tile.isFlipped() && flipsRemaining > 0) {
             tile.setFlipped(true);
             flipsRemaining--;
-            return true;
         }
-        return false;
     }
 
     /**
@@ -146,77 +179,3 @@ class MemoryGameModel {
         }
     }
 }
-//-----------------------------------------------------------------------------------------------------------------------------
-
-    // public void play() {
-    //     Scanner scanner = new Scanner(System.in);
-
-    //     while (matchesFound < tiles.size() / 2) {
-
-    //         int tileIndex;
-
-    //         // Check validity
-
-    //         try { // THIS GOES IN THE VIEW
-    //             tileIndex = Integer.parseInt(input);
-    //         } catch (NumberFormatException e) {
-    //             System.out.println("Invalid input. Please enter a tile number.");
-    //             continue;
-    //         }
-    //         if (tileIndex < 0 || tileIndex >= tiles.size()) {
-    //             System.out.println("Invalid tile number. Please enter a valid tile number.");
-    //             continue;
-    //         }
-
-    //         Tile tile = tiles.get(tileIndex);
-    //         if (tile.isFlipped()) {
-    //             System.out.println("Tile already flipped. Try again.");
-    //         } else {
-    //             tile.setFlipped(true);
-    //             flipsRemaining--;
-    //             if (checkForMatch(tile)) {
-    //                 System.out.println("Match found!");
-    //                 matchesFound++;
-    //                 playerScore++;
-    //             } else if (flipsRemaining == 0) {
-    //                 System.out.println("No match. Out of flips. Next turn.");
-    //                 resetFlippedTiles();
-    //                 flipsRemaining = 2; // Reset the flips remaining for the next turn
-    //             } else {
-    //                 System.out.println("No match. Try again.");
-    //             }
-    //         }
-    //     }
-
-
-    //     endGame();
-    //     scanner.close();
-    // }
-
-    /**
-     * See if there's another tile with the same symbol
-     *
-     * @param tile Reference title
-     * @return True if found match, false otherwise
-     */
-//     private boolean checkForMatch(Tile tile) {
-//         int count = 0;
-//         for (Tile t : tiles) {
-//             if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
-//                 count++;
-//             }
-//         }
-//         return count == 2;
-//     }
-
-//     /**
-//      * Unflips all tiles in the game.
-//      */
-//     private void resetFlippedTiles() {
-//         for (Tile tile : tiles) {
-//             if (tile.isFlipped()) {
-//                 tile.setFlipped(false);
-//             }
-//         }
-//     }
-// }

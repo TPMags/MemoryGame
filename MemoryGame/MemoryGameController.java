@@ -3,8 +3,8 @@ import java.util.TimerTask;
 
 class MemoryGameController {
 
-    private static MemoryGameView view;
-    private static MemoryGameModel model;
+    private final MemoryGameView view;
+    private final MemoryGameModel model;
     private static Timer timer;
 
     /**
@@ -16,25 +16,7 @@ class MemoryGameController {
     public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
         this.model = model;
         this.view = view;
-    }
-
-    /**
-     * Starts the game by initializing game elements
-     */
-    public void startGame() {
-        // Start the timer
-
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                model.increaseSeconds();;
-                if (model.getElapsedTime() >= model.getGameDuration()) {
-                    view.gameOver();
-                    endGame();
-                }
-            }
-        }, 1000, 1000);
+        model.initializeTiles(6);
     }
 
     /**
@@ -55,49 +37,64 @@ class MemoryGameController {
     }
 
     private void startTimer() {
-        /* Todo */
-        return;
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                model.increaseSeconds();
+                if (model.getElapsedTime() >= model.getGameDuration()) {
+                    view.gameOver();
+                    endGame();
+                }
+            }
+        }, 1000, 60000);
     }
 
-    private void play() {
-        /* Todo */
-        return;
+    public  void play() {
+        startTimer();
+        while (model.getMatchesFound() < model.getNumberOfTiles() / 2) {
+            view.displayBoard(model.getTiles());
+            String input = view.prompt();
+            if (input.equalsIgnoreCase("q")) {
+                // Quits the program
+                view.quitGame();
+                endGame();
+                return;
+            } else if (input.equalsIgnoreCase("r")) {
+                // Resets game state, recreates timer, and continues
+                view.restartGame();
+                restartGame();
+            }
+            int tileIndex;
+            try {
+                tileIndex = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                view.invalidInput();
+                continue;
+            }
+            if (tileIndex < 0 || tileIndex >= model.getNumberOfTiles()) {
+                view.invalidNum();
+                continue;
+            }
+            if (model.getTile(tileIndex).isFlipped()) {
+                view.invalidFlip();
+            } else {
+                model.flipTile(tileIndex);
+                if (model.checkForMatch()) {
+                    view.matchFound();
+                    model.increaseMatchesFound();
+                    model.increasePlayerScore();
+                } else if (model.getFlipsRemaining() == 0) {
+                    view.noMatch();
+                    model.resetFlippedTiles();
+                    model.resetFlips();
+                } else {
+                    view.noMatch();
+                }
+            }
+        }
+        view.successGameOver(model.getPlayerScore(), model.getElapsedTime());
+        endGame();
+        view.close();
     }
 }
-//---------------------------------------------------------------------------------------------------------------------------------
-
-    // ** THIS NEEDS TO BE REFACTORED **
-
-    // public void play() {
-
-    //     while (model.getMatchesFound() < model.getTilesSize() / 2) {
-    //         view.displayBoard(model.getTiles());
-    //         String input = view.prompt();
-    //         if (input.equalsIgnoreCase("q")) {
-    //             // Quits the program
-    //             view.quitGame();
-    //             endGame();
-    //             timer.cancel();
-    //             return;
-    //         } else if (input.equalsIgnoreCase("r")) {
-    //             // Resets game state, recreates timer, and continues
-    //             view.restartGame();
-    //             timer.cancel();
-    //             restartGame();
-    //             timer = new Timer();
-    //             timer.scheduleAtFixedRate(new TimerTask() {
-    //                 @Override
-    //                 public void run() {
-    //                     secondsElapsed++;
-    //                     if (secondsElapsed >= gameDuration) {
-    //                         view.gameOver();
-    //                         endGame();
-    //                     }
-    //                 }
-    //             }, 1000, 1000);
-    //             continue;
-    //         }
-    //     }
-    //     view.successGameOver();
-    // } 
-

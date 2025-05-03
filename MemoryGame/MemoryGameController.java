@@ -22,7 +22,7 @@ class MemoryGameController {
     /**
      * Ends the game
      */
-    public void endGame() {
+    private void endGame() {
         timer.cancel();
     }
 
@@ -36,6 +36,9 @@ class MemoryGameController {
         startTimer();
     }
 
+    /** 
+     * Starts a 60 second timer.
+     */
     private void startTimer() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -50,7 +53,10 @@ class MemoryGameController {
         }, 1000, 60000);
     }
 
-    public  void play() {
+    /**
+     * The core gameplay loop for the game.
+     */
+    public void play() {
         startTimer();
         while (model.getMatchesFound() < model.getNumberOfTiles() / 2) {
             view.displayBoard(model.getTiles());

@@ -5,15 +5,21 @@ class MemoryGameTextView implements MemoryGameView {
 
     private final Scanner scanner;
 
-    MemoryGameTextView() {
+    public MemoryGameTextView() {
         this.scanner = new Scanner(System.in);
     }
-
+    
+    /**
+     * Closes the scanner.
+     */
     @Override
     public void close() {
         scanner.close();
     }
 
+    /**
+     * Lets the player Know that they've won the game,how much time they took, and their score.
+     */
     @Override
     public void successGameOver(int playerScore, int secondsElapsed) {
         System.out.println("Congratulations! You found all the matches.");
@@ -21,7 +27,9 @@ class MemoryGameTextView implements MemoryGameView {
         System.out.println("Time elapsed: " + secondsElapsed + " seconds");
     }
 
-
+    /**
+     * Prompts the user to input a card number, to quit the game, or restart the game.
+     */
     @Override
     public String prompt() {
         System.out.println("Enter the tile number to flip, "
@@ -30,6 +38,9 @@ class MemoryGameTextView implements MemoryGameView {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays the game board in the terminal
+     */
     @Override
     public void displayBoard(List<Tile> tiles) {
         System.out.println("\n------- Memory Game -------");
@@ -53,6 +64,9 @@ class MemoryGameTextView implements MemoryGameView {
         System.out.println("\n---------------------------");
     }
 
+    /**
+     * Display a message given through the parameter.
+     */
     @Override
     public void displayMessage(String message) {
         System.out.println(message);

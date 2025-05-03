@@ -52,17 +52,26 @@ class MemoryGameModel {
     }
 
     /**
-     * 
+     * Get a list of all tiles.
      * @return Each tile
      */
     public List<Tile> getTiles() {
         return tiles;
     }
 
+    /**
+     * Returns a tile at a specific index.
+     * @param index
+     * @return Tile
+     */
     public Tile getTile(int index) {
         return tiles.get(index);
     }
 
+    /**
+     * Gets the total number of tiles on the board
+     * @return int
+     */
     public int getNumberOfTiles() {
         int toBeReturned = 0;
         if (!tiles.isEmpty()) {
@@ -73,8 +82,6 @@ class MemoryGameModel {
         } else {
             return 0;
         }
-        
-        
     }
 
     /**
@@ -122,10 +129,16 @@ class MemoryGameModel {
         return playerScore; 
     }
 
+    /**
+     * Increases the number of matches found by one.
+     */
     public void increaseMatchesFound() {
         matchesFound++;
     }
 
+    /**
+     * Increases the player score by one.
+     */
     public void increasePlayerScore() {
         playerScore++;
     }

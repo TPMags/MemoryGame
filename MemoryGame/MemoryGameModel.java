@@ -15,10 +15,9 @@ class MemoryGameModel {
     public MemoryGameModel() {
         this.tiles = new ArrayList<>();
         this.flipsRemaining = 2;
-        this.playerScore = 0;
         this.matchesFound = 0;
         this.secondsElapsed = 0;
-        this.gameDuration = 60;
+        this.gameDuration = 10;
     }
 
     /**
@@ -43,7 +42,6 @@ class MemoryGameModel {
      */
     public void resetGameState() {
         flipsRemaining = 2;
-        playerScore = 0;
         matchesFound = 0;
         secondsElapsed = 0;
         if (tiles != null) {
@@ -122,25 +120,11 @@ class MemoryGameModel {
         return flipsRemaining; 
     }
 
-    /** 
-     * @return player score. 
-     */
-    public int getPlayerScore() { 
-        return playerScore; 
-    }
-
     /**
      * Increases the number of matches found by one.
      */
     public void increaseMatchesFound() {
         matchesFound++;
-    }
-
-    /**
-     * Increases the player score by one.
-     */
-    public void increasePlayerScore() {
-        playerScore++;
     }
 
     /**
@@ -159,17 +143,20 @@ class MemoryGameModel {
      * Checks whether two flipped tiles match and updates score if they do.
      * @return true if a match is found.
      */
-    public boolean checkForMatch() {
-        List<Tile> flipped = new ArrayList<>();
+    public boolean checkForMatch(Tile tile) {
+        int count = 0;
         for (Tile t : tiles) {
-            if (t.isFlipped()) {
-                flipped.add(t);
+            if(t.equals(tile)){continue;}
+            if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
+                t.setMatched(true);
+                tile.setMatched(true);
+                increaseMatchesFound();
+                System.out.println("matched");
+                count++;
             }
         }
-        if (flipped.size() == 2 && flipped.get(0).getSymbol() == flipped.get(1).getSymbol()) {
-            return true;
-        }
-        return false;
+        //return count == ((matchesFound * 2) + 2);
+        return count == 2;
     }
 
     /** 
@@ -183,9 +170,21 @@ class MemoryGameModel {
      * Resets all flipped tiles to hidden state. 
      */
     public void resetFlippedTiles() {
-        for (Tile tile : tiles) {
-            if (tile.isFlipped()) {
-                tile.setFlipped(false);
+        System.out.println("reseting tiles!");
+        // for (Tile tile : tiles) {
+        //     if (tile.isFlipped() == true && tile.isMatched() == false) {
+        //         tile.setFlipped(false);
+        //     }
+        // }
+
+        for(Tile tile : tiles){
+            tile.setFlipped(false);
+        }
+
+        for(Tile tile : tiles){
+            System.out.println(tiles.indexOf(tile) + " " + tile.isMatched());
+            if(tile.isMatched() == true){
+                tile.setFlipped(true);
             }
         }
     }

@@ -3,40 +3,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-
-        MemoryGameView view;
-        MemoryGameController controller;
+        System.out.println("Choose your view: 1 (Text) or 2 (GUI): ");
+        String choice = scanner.nextLine().trim();
 
         MemoryGameModel model = new MemoryGameModel();
+        MemoryGameView view;
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose view mode: 1. Text  2. GUI");
-        try {
-            int choice = scanner.nextInt();
-            
-            if (choice == 1) {
-                view = new MemoryGameTextView();
-                controller = new MemoryGameController(model, view);
-                controller.play();
-            } else if (choice == 2) {
-                view = new MemoryGameGUIView();
-                controller = new MemoryGameController(model, view);
-                //guiView.setController(controller);
-                controller.play();
-            } else {
-                System.out.println("Invalid choice. Defaulting to Text View.");
-                view = new MemoryGameTextView();
-                controller = new MemoryGameController(model, view);
-                controller.play();
-            }
-        } catch (InputMismatchException e){
-            System.out.println("Invalid choice. Defaulting to Text View.");
+        if (choice.equals("2")) {
+            view = new MemoryGameGUIView();
+        } else {
             view = new MemoryGameTextView();
-            controller = new MemoryGameController(model, view);
-            controller.play();
-        } finally {
-            scanner.close();
         }
+
+        MemoryGameController controller = new MemoryGameController(model, view);
+        controller.play();
+
+        scanner.close();
     }
 }
+

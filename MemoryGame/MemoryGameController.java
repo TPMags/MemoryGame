@@ -50,7 +50,7 @@ class MemoryGameController {
                     endGame();
                 }
             }
-        }, 1000, 60000);
+        }, 1000, 1000);
     }
 
     /**
@@ -65,7 +65,7 @@ class MemoryGameController {
                 // Quits the program
                 view.displayMessage("Good Bye!");
                 endGame();
-                return;
+                break;
             } else if (input.equalsIgnoreCase("r")) {
                 // Resets game state, recreates timer, and continues
                 view.displayMessage("Restarting the game...");

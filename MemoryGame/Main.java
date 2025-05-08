@@ -14,24 +14,29 @@ public class Main {
         System.out.println("Choose view mode: 1. Text  2. GUI");
         try {
             int choice = scanner.nextInt();
+            
             if (choice == 1) {
                 view = new MemoryGameTextView();
                 controller = new MemoryGameController(model, view);
+                controller.play();
             } else if (choice == 2) {
-                MemoryGameGUIView guiView = new MemoryGameGUIView();
-                controller = new MemoryGameController(model, guiView);
+                view = new MemoryGameGUIView();
+                controller = new MemoryGameController(model, view);
                 //guiView.setController(controller);
-                view = guiView;
-            } else
-            controller.play();
-
+                controller.play();
+            } else {
+                System.out.println("Invalid choice. Defaulting to Text View.");
+                view = new MemoryGameTextView();
+                controller = new MemoryGameController(model, view);
+                controller.play();
+            }
         } catch (InputMismatchException e){
             System.out.println("Invalid choice. Defaulting to Text View.");
             view = new MemoryGameTextView();
             controller = new MemoryGameController(model, view);
+            controller.play();
         } finally {
             scanner.close();
         }
-
     }
 }

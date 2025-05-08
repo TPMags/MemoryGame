@@ -9,9 +9,6 @@ class MemoryGameTextView implements MemoryGameView {
         this.scanner = new Scanner(System.in);
     }
 
-    @Override
-    public void start() {
-    }
 
     /**
      * Closes the scanner.

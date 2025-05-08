@@ -2,10 +2,6 @@ import java.util.List;
 
 interface MemoryGameView {
 
-    /**
-     * Start the view
-     */
-    void start();
 
     /**
      * Display the board

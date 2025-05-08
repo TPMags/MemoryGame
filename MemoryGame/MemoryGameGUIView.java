@@ -55,9 +55,6 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
         boardPanel.repaint();
     }
 
-    @Override
-    public void start() {
-    }
 
     @Override
     public void displayBoard(List<Tile> tiles) {

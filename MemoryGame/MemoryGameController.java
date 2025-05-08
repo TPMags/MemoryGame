@@ -47,6 +47,7 @@ class MemoryGameController {
                 model.increaseSeconds();
                 if (model.getElapsedTime() >= model.getGameDuration()) {
                     view.displayMessage("Time's up! Game over.");
+                    view.close();
                     endGame();
                 }
             }
@@ -61,9 +62,10 @@ class MemoryGameController {
         while (model.getMatchesFound() < model.getNumberOfTiles() / 2) {
             view.displayBoard(model.getTiles());
             String input = view.prompt();
-            if (input.equalsIgnoreCase("q")) {
+            if (input.equalsIgnoreCase("q") || model.getElapsedTime() > model.getGameDuration()) {
                 // Quits the program
                 view.displayMessage("Good Bye!");
+                view.close();
                 endGame();
                 break;
             } else if (input.equalsIgnoreCase("r")) {
@@ -86,10 +88,9 @@ class MemoryGameController {
                 view.displayMessage("Tile already flipped. Try again.");
             } else {
                 model.flipTile(tileIndex);
-                if (model.checkForMatch()) {
+                if (model.checkForMatch(model.getTile(tileIndex))) {
                     view.displayMessage("Match found!");
                     model.increaseMatchesFound();
-                    model.increasePlayerScore();
                 } else if (model.getFlipsRemaining() == 0) {
                     view.displayMessage("No match. Out of flips. Next turn.");
                     model.resetFlippedTiles();
@@ -99,7 +100,7 @@ class MemoryGameController {
                 }
             }
         }
-        view.successGameOver(model.getPlayerScore(), model.getElapsedTime());
+        view.successGameOver(model.getMatchesFound(), model.getElapsedTime());
         endGame();
         view.close();
     }

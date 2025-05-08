@@ -4,10 +4,12 @@
 class Tile {
     private char symbol;
     private boolean flipped;
+    private boolean matched;
 
     public Tile(char symbol) {
         this.symbol = symbol;
         this.flipped = false;
+        this.matched = false;
     }
 
     /**
@@ -24,6 +26,22 @@ class Tile {
      */
     public boolean isFlipped() {
         return flipped;
+    }
+
+    /**
+     * lets the program know if the tile is matched or not.
+     * @return matched
+     */
+    public boolean isMatched() {
+        return matched;
+    }
+
+    /**
+     * Sets the tile to matched.
+     * @param matched
+     */
+    public void setMatched(boolean matched) {
+        this.matched = matched;
     }
 
     /**

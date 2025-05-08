@@ -16,6 +16,7 @@ class MemoryGameTextView implements MemoryGameView {
     @Override
     public void close() {
         scanner.close();
+        System.exit(1);
     }
 
     /**

@@ -1,10 +1,25 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        MemoryGameModel model = new MemoryGameModel();
-        // using the text-based view
-        MemoryGameView view = new MemoryGameTextView(); 
-        MemoryGameController controller = new MemoryGameController(model, view);
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Choose your view: 1 (Text) or 2 (GUI): ");
+        String choice = scanner.nextLine().trim();
+
+        MemoryGameModel model = new MemoryGameModel();
+        MemoryGameView view;
+
+        if (choice.equals("2")) {
+            view = new MemoryGameGUIView();
+        } else {
+            view = new MemoryGameTextView();
+        }
+
+        MemoryGameController controller = new MemoryGameController(model, view);
         controller.play();
+
+        scanner.close();
     }
 }
+

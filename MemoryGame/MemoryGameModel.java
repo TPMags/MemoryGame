@@ -167,8 +167,6 @@ class MemoryGameModel {
             }
         }
         if (flipped.size() == 2 && flipped.get(0).getSymbol() == flipped.get(1).getSymbol()) {
-            matchesFound++;
-            playerScore++;
             return true;
         }
         return false;

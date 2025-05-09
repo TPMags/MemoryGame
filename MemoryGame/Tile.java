@@ -5,11 +5,13 @@ public class Tile {
     private final char symbol;
     private boolean flipped;
     private boolean matched;
+    private boolean seen;
 
     public Tile(char symbol) {
         this.symbol = symbol;
         this.flipped = false;
         this.matched = false;
+        this.seen = false;
     }
 
     /**
@@ -55,5 +57,23 @@ public class Tile {
      */
     public void setMatched(boolean matched) {
         this.matched = matched;
+    }
+
+    /**
+     * [UNDOCUMENTED]
+     * Gets the seen state of this tile
+     * @return True if seen, false otherwise
+     */
+    public boolean isSeen() {
+        return seen;
+    }
+
+    /**
+     * [UNDOCUMENTED]
+     * Sets the seen state of this tile.
+     * @param seen
+     */
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 }

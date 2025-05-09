@@ -2,29 +2,35 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The model component of the Memory Game.
+ * Manages game state, tile logic, time tracking, and scoring.
+ */
 class MemoryGameModel {
     private int flipsRemaining;
     private int playerScore;
-    // The number of matches that the player has found.
-    // When == tiles.size()/2, main loop exits.
     private int matchesFound;
     private List<Tile> tiles;
     private int secondsElapsed;
     private int gameDuration;
 
+    /**
+     * Constructs the model for the Memory Game.
+     * Initializes the tile list and default game parameters.
+     */
     public MemoryGameModel() {
         this.tiles = new ArrayList<>();
         this.flipsRemaining = 2;
         this.matchesFound = 0;
         this.secondsElapsed = 0;
-        this.gameDuration = 10;
+        this.gameDuration = 60;
     }
 
     /**
-     * Creates tile pairs with smybols increasing from A
-     * (i.e. A, A, B, B, C, C, ...)
+     * Creates tile pairs with symbols starting from 'A' (e.g., A, A, B, B, ...),
+     * then shuffles them to randomize positions.
      *
-     * @param pairs Number of tiles to create
+     * @param pairs the number of unique tile pairs to generate
      */
     public void initializeTiles(int pairs) {
         tiles.clear();
@@ -32,13 +38,12 @@ class MemoryGameModel {
             tiles.add(new Tile(symbol));
             tiles.add(new Tile(symbol));
         }
-
-        // Makes sure that the tile matches aren't directly next to each other.
         Collections.shuffle(tiles);
     }
 
     /**
-     * Resets all game state variables except game duration.
+     * Resets the game state including flipped status, match count,
+     * remaining flips, and time—but preserves game duration.
      */
     public void resetGameState() {
         flipsRemaining = 2;
@@ -50,93 +55,88 @@ class MemoryGameModel {
     }
 
     /**
-     * Get a list of all tiles.
+     * Returns the list of all tiles currently on the board.
      *
-     * @return Each tile
+     * @return a list of {@code Tile} objects
      */
     public List<Tile> getTiles() {
         return tiles;
     }
 
     /**
-     * Returns a tile at a specific index.
+     * Retrieves the tile at a specific index.
      *
-     * @param index
-     * @return Tile
+     * @param index the index of the tile
+     * @return the tile at the specified index
      */
     public Tile getTile(int index) {
         return tiles.get(index);
     }
 
     /**
-     * Gets the total number of tiles on the board
+     * Returns the total number of tiles currently in the game.
      *
-     * @return int
+     * @return the number of tiles
      */
     public int getNumberOfTiles() {
-        int toBeReturned = 0;
-        if (!tiles.isEmpty()) {
-            for (Tile tile : tiles) {
-                toBeReturned++;
-            }
-            return toBeReturned;
-        } else {
-            return 0;
-        }
+        return tiles.size();
     }
 
     /**
-     * Gets all of the matches found in the current game
+     * Returns the number of matches found by the player so far.
      *
-     * @return the current number of matches found
+     * @return current match count
      */
     public int getMatchesFound() {
         return matchesFound;
     }
 
     /**
-     * Gets how much time has passed in the game
+     * Returns how many seconds have passed since the game started.
      *
-     * @return secondsElapsed
+     * @return elapsed time in seconds
      */
     public int getElapsedTime() {
         return secondsElapsed;
     }
 
     /**
-     * Gets the set game duration
+     * Returns the total time limit for the game.
      *
-     * @return gameDuration
+     * @return game duration in seconds
      */
     public int getGameDuration() {
         return gameDuration;
     }
 
     /**
-     * Increases the seconds Elapsed by one
+     * Increments the elapsed game time by one second.
      */
     public void increaseSeconds() {
         secondsElapsed++;
     }
 
     /**
-     * @return remaining flips in the turn.
+     * Returns the number of flips remaining in the current turn.
+     *
+     * @return remaining flips
      */
     public int getFlipsRemaining() {
         return flipsRemaining;
     }
 
     /**
-     * Increases the number of matches found by one.
+     * Increments the number of matches found by one.
      */
     public void increaseMatchesFound() {
         matchesFound++;
     }
 
     /**
-     * Attempts to flip a tile at a specific index.
+     * Flips a tile at the specified index if it's not already flipped
+     * and flips are still allowed this turn.
      *
-     * @param index tile index to flip.
+     * @param index the index of the tile to flip
      */
     public void flipTile(int index) {
         Tile tile = tiles.get(index);
@@ -147,54 +147,44 @@ class MemoryGameModel {
     }
 
     /**
-     * Checks whether two flipped tiles match and updates score if they do.
+     * Checks if a flipped tile has a matching pair that is also flipped.
+     * If a match is found, both tiles are marked as matched.
      *
-     * @return true if a match is found.
+     * @param tile the tile to check for a match
+     * @return {@code true} if a match is found, {@code false} otherwise
      */
     public boolean checkForMatch(Tile tile) {
         int count = 0;
         for (Tile t : tiles) {
-            if (t.equals(tile)) {
-                continue;
-            }
+            if (t.equals(tile)) continue;
             if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
                 t.setMatched(true);
                 tile.setMatched(true);
                 increaseMatchesFound();
-                System.out.println("matched");
                 count++;
             }
         }
-        //return count == ((matchesFound * 2) + 2);
         return count == 2;
     }
 
     /**
-     * Resets flip counter for next turn.
+     * Resets the flip counter to allow 2 flips for the next turn.
      */
     public void resetFlips() {
         flipsRemaining = 2;
     }
 
     /**
-     * Resets all flipped tiles to hidden state,
-     * except matched tiles
+     * Resets all non-matched flipped tiles back to their hidden state.
+     * Keeps matched tiles face-up.
      */
     public void resetFlippedTiles() {
-        System.out.println("reseting tiles!");
-        // for (Tile tile : tiles) {
-        //     if (tile.isFlipped() == true && tile.isMatched() == false) {
-        //         tile.setFlipped(false);
-        //     }
-        // }
-
         for (Tile tile : tiles) {
             tile.setFlipped(false);
         }
 
         for (Tile tile : tiles) {
-            System.out.println(tiles.indexOf(tile) + " " + tile.isMatched());
-            if (tile.isMatched() == true) {
+            if (tile.isMatched()) {
                 tile.setFlipped(true);
             }
         }

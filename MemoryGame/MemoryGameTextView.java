@@ -1,17 +1,23 @@
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A text-based view for the Memory Game.
+ * Handles user interaction via the terminal.
+ */
 class MemoryGameTextView implements MemoryGameView {
 
     private final Scanner scanner;
 
+    /**
+     * Constructs a new MemoryGameTextView and initializes the Scanner for user input.
+     */
     public MemoryGameTextView() {
         this.scanner = new Scanner(System.in);
     }
 
-
     /**
-     * Closes the scanner.
+     * Closes the scanner to release system resources.
      */
     @Override
     public void close() {
@@ -19,7 +25,10 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     /**
-     * Lets the player Know that they've won the game,how much time they took, and their score.
+     * Displays a congratulatory message to the player upon successfully finishing the game.
+     *
+     * @param playerScore     the player's final score
+     * @param secondsElapsed  the time taken to complete the game in seconds
      */
     @Override
     public void successGameOver(int playerScore, int secondsElapsed) {
@@ -29,7 +38,10 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     /**
-     * Prompts the user to input a card number, to quit the game, or restart the game.
+     * Prompts the user to input the next move.
+     * The input can be a tile number, 'q' to quit, or 'r' to restart the game.
+     *
+     * @return the user's input as a String
      */
     @Override
     public String prompt() {
@@ -40,7 +52,10 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     /**
-     * Displays the game board in the terminal
+     * Displays the current game board to the terminal.
+     * Flipped tiles show their symbols, while unflipped tiles are represented with their index.
+     *
+     * @param tiles the list of tiles representing the game board
      */
     @Override
     public void displayBoard(List<Tile> tiles) {
@@ -66,7 +81,9 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     /**
-     * Display a message given through the parameter.
+     * Displays a generic message to the terminal.
+     *
+     * @param message the message to display
      */
     @Override
     public void displayMessage(String message) {

@@ -1,6 +1,11 @@
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The controller for the Memory Game.
+ * It manages the game loop, handles user input, updates the model,
+ * and communicates with the view to reflect game state changes.
+ */
 class MemoryGameController {
 
     private static Timer timer;
@@ -8,10 +13,10 @@ class MemoryGameController {
     private final MemoryGameModel model;
 
     /**
-     * Constructer for the game controller
+     * Constructs the game controller.
      *
-     * @param model model component that interacts with the controller
-     * @param view  view component that interacts with the controller
+     * @param model the model component representing game logic and state
+     * @param view  the view component responsible for user interaction
      */
     public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
         this.model = model;
@@ -20,14 +25,15 @@ class MemoryGameController {
     }
 
     /**
-     * Ends the game
+     * Ends the game by cancelling the active timer.
      */
     private void endGame() {
         timer.cancel();
     }
 
     /**
-     * Resets game state and adds 6 tile pairs
+     * Restarts the game by resetting the model state,
+     * reinitializing tiles, and restarting the timer.
      */
     private void restartGame() {
         timer.cancel();
@@ -37,7 +43,8 @@ class MemoryGameController {
     }
 
     /**
-     * Starts a 60 second timer.
+     * Starts a countdown timer that updates the elapsed time every second.
+     * Ends the game if the time exceeds the set duration.
      */
     private void startTimer() {
         timer = new Timer();
@@ -55,24 +62,34 @@ class MemoryGameController {
     }
 
     /**
-     * The core gameplay loop for the game.
+     * Runs the main gameplay loop:
+     * - Displays the board
+     * - Handles user input
+     * - Checks for matches
+     * - Updates the model and view accordingly
+     * Ends when all matches are found or the player quits.
      */
     public void play() {
         startTimer();
         while (model.getMatchesFound() < model.getNumberOfTiles() / 2) {
             view.displayBoard(model.getTiles());
             String input = view.prompt();
+
+            // Handle quit or timeout
             if (input.equalsIgnoreCase("q") || model.getElapsedTime() > model.getGameDuration()) {
-                // Quits the program
                 view.displayMessage("Good Bye!");
                 view.close();
                 endGame();
                 break;
-            } else if (input.equalsIgnoreCase("r")) {
-                // Resets game state, recreates timer, and continues
+            }
+
+            // Handle restart
+            if (input.equalsIgnoreCase("r")) {
                 view.displayMessage("Restarting the game...");
                 restartGame();
+                continue;
             }
+
             int tileIndex;
             try {
                 tileIndex = Integer.parseInt(input);
@@ -80,14 +97,17 @@ class MemoryGameController {
                 view.displayMessage("Invalid input. Please enter a tile number.");
                 continue;
             }
+
             if (tileIndex < 0 || tileIndex >= model.getNumberOfTiles()) {
                 view.displayMessage("Invalid tile number. Please enter a valid tile number.");
                 continue;
             }
+
             if (model.getTile(tileIndex).isFlipped()) {
                 view.displayMessage("Tile already flipped. Try again.");
             } else {
                 model.flipTile(tileIndex);
+
                 if (model.checkForMatch(model.getTile(tileIndex))) {
                     view.displayMessage("Match found!");
                     model.increaseMatchesFound();
@@ -100,6 +120,8 @@ class MemoryGameController {
                 }
             }
         }
+
+        // Game completed
         view.successGameOver(model.getMatchesFound(), model.getElapsedTime());
         endGame();
         view.close();

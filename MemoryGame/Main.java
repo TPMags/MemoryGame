@@ -26,6 +26,7 @@ public class Main {
             scanner.nextLine(); // Clear invalid input
         }
 
+
         System.out.println("Choose view mode: 1. Text  2. GUI");
         try {
             int choice = scanner.nextInt();
@@ -45,7 +46,6 @@ public class Main {
             view = new MemoryGameTextView(rows);
             controller = new MemoryGameController(model, view, rows * 3);
         }
-
         scanner.close();
         controller.play();
     }

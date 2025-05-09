@@ -15,16 +15,12 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
 
     private int rowDim;
 
-    @Deprecated
-    private int columnDim; // How many columns wide;
-
     /**
      * Constructs the GUI view for the Memory Game, setting up the frame,
      * layout, buttons, and board.
      *
-     * @param columnDim Number of columns
      */
-    public MemoryGameGUIView(int columnDim, int rowDim) {
+    public MemoryGameGUIView(int rowDim) {
         setTitle("Memory Game");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

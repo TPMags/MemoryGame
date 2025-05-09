@@ -10,15 +10,11 @@ class MemoryGameTextView implements MemoryGameView {
     private final Scanner scanner;
     private int rowDim;
 
-    @Deprecated
-    private int columnDim; // How many columns wide;
-
     /**
      * Constructs a new MemoryGameTextView and initializes the Scanner for user input.
      *
-     * @param columnDim Number of columns
      */
-    public MemoryGameTextView(int rowDim, int columnDim) {
+    public MemoryGameTextView(int rowDim) {
         this.scanner = new Scanner(System.in);
         this.rowDim = rowDim;
     }

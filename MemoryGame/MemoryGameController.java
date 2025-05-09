@@ -11,20 +11,17 @@ class MemoryGameController {
     private static Timer timer;
     private final MemoryGameView view;
     private final MemoryGameModel model;
-    private final int numberOfPairs;
 
     /**
      * Constructs the game controller.
      *
      * @param model the model component representing game logic and state
      * @param view  the view component responsible for user interaction
-     * @param pairs Number of pairs needed
      */
-    public MemoryGameController(MemoryGameModel model, MemoryGameView view, int pairs) {
+    public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
         this.model = model;
         this.view = view;
-        this.numberOfPairs = pairs;
-        model.initializeTiles(pairs);
+        model.initializeTiles(6);
     }
 
     /**
@@ -41,7 +38,7 @@ class MemoryGameController {
     private void restartGame() {
         timer.cancel();
         model.resetGameState();
-        model.initializeTiles(numberOfPairs);
+        model.initializeTiles(6);
         startTimer();
     }
 
@@ -119,6 +116,7 @@ class MemoryGameController {
                     model.resetFlippedTiles();
                     model.resetFlips();
                 } else {
+                    // TODO: Should this say "Out of flips"??
                     view.displayMessage("No match. Out of flips. Next turn.");
                 }
             }

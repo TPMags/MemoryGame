@@ -8,12 +8,16 @@ import java.util.Scanner;
 class MemoryGameTextView implements MemoryGameView {
 
     private final Scanner scanner;
+    private int rowDim;
+    private int columnDim; // How many columns wide;
 
     /**
      * Constructs a new MemoryGameTextView and initializes the Scanner for user input.
      */
-    public MemoryGameTextView() {
+    public MemoryGameTextView(int rowDim, int columnDim) {
         this.scanner = new Scanner(System.in);
+        this.rowDim = rowDim;
+        this.columnDim = columnDim;
     }
 
     /**

@@ -13,11 +13,14 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
     private final JTextArea promptArea;
     private String latestCommand = "";
 
+    private int rowDim;
+    private int columnDim; // How many columns wide;
+
     /**
      * Constructs the GUI view for the Memory Game, setting up the frame,
      * layout, buttons, and board.
      */
-    public MemoryGameGUIView() {
+    public MemoryGameGUIView(int columnDim, int rowDim) {
         setTitle("Memory Game");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +50,9 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
         add(controlPanel, BorderLayout.NORTH);
 
         setVisible(true);
+
+        this.rowDim = rowDim;
+        this.columnDim = columnDim;
     }
 
     /**

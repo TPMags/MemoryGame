@@ -116,7 +116,6 @@ class MemoryGameController {
                     model.resetFlippedTiles();
                     model.resetFlips();
                 } else {
-                    // TODO: Should this say "Out of flips"??
                     view.displayMessage("No match. Out of flips. Next turn.");
                 }
             }

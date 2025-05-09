@@ -10,7 +10,7 @@ class MemoryGameModel {
     private final List<Tile> tiles;
     private final int gameDuration;
     private int flipsRemaining;
-    private int playerScore;    // TODO: Add player score
+    private int playerScore;
     private int matchesFound;
     private int secondsElapsed;
 

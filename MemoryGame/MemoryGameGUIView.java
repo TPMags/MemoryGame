@@ -13,16 +13,20 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
     private final JTextArea promptArea;
     private String latestCommand = "";
 
+    private final int rowDim;
+
     /**
      * Constructs the GUI view for the Memory Game, setting up the frame,
      * layout, buttons, and board.
      */
-    public MemoryGameGUIView() {
+    public MemoryGameGUIView(int rowDim) {
+        this.rowDim = rowDim;
+
         setTitle("Memory Game");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        boardPanel = new JPanel(new GridLayout(2, 6)); // Assuming 12 tiles (2 rows of 6)
+        boardPanel = new JPanel(new GridLayout(rowDim, 6)); // Assuming 12 tiles (2 rows of 6)
         promptArea = new JTextArea(3, 40);
 
         initializeBoard();
@@ -47,6 +51,7 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
         add(controlPanel, BorderLayout.NORTH);
 
         setVisible(true);
+
     }
 
     /**
@@ -55,7 +60,7 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
     private void initializeBoard() {
         boardPanel.removeAll();
 
-        for (int i = 0; i < 12; i++) { // Fixed to 12 tiles
+        for (int i = 0; i < rowDim * 6; i++) { // Fixed to 12 tiles
             JButton tileButton = new JButton("?");
             tileButton.setActionCommand(String.valueOf(i));
             tileButton.addActionListener(this);

@@ -1,8 +1,8 @@
 /**
  * A tile in the game with a symbol (e.g. A, B, ...)
  */
-class Tile {
-    private char symbol;
+public class Tile {
+    private final char symbol;
     private boolean flipped;
     private boolean matched;
 
@@ -33,7 +33,7 @@ class Tile {
     /**
      * Sets the flipped state to either true or false
      *
-     * @param flipped
+     * @param flipped If true, flipped, otherwise unflipped
      */
     public void setFlipped(boolean flipped) {
         this.flipped = flipped;
@@ -49,9 +49,9 @@ class Tile {
     }
 
     /**
-     * Sets the tile to matched.
+     * Sets the tile's matched state.
      *
-     * @param matched
+     * @param matched If true, matched, otherwise unmatched
      */
     public void setMatched(boolean matched) {
         this.matched = matched;

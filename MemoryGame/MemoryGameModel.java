@@ -7,12 +7,12 @@ import java.util.List;
  * Manages game state, tile logic, time tracking, and scoring.
  */
 class MemoryGameModel {
+    private final List<Tile> tiles;
+    private final int gameDuration;
     private int flipsRemaining;
-    private int playerScore;
+    private int playerScore;    // TODO: Add player score
     private int matchesFound;
-    private List<Tile> tiles;
     private int secondsElapsed;
-    private int gameDuration;
 
     /**
      * Constructs the model for the Memory Game.
@@ -49,9 +49,7 @@ class MemoryGameModel {
         flipsRemaining = 2;
         matchesFound = 0;
         secondsElapsed = 0;
-        if (tiles != null) {
-            tiles.forEach(t -> t.setFlipped(false));
-        }
+        tiles.forEach(t -> t.setFlipped(false));
     }
 
     /**

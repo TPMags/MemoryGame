@@ -17,41 +17,6 @@ class MemoryGameTextView implements MemoryGameView {
     }
 
     /**
-     * Closes the scanner to release system resources.
-     */
-    @Override
-    public void close() {
-        scanner.close();
-    }
-
-    /**
-     * Displays a congratulatory message to the player upon successfully finishing the game.
-     *
-     * @param playerScore     the player's final score
-     * @param secondsElapsed  the time taken to complete the game in seconds
-     */
-    @Override
-    public void successGameOver(int playerScore, int secondsElapsed) {
-        System.out.println("Congratulations! You found all the matches.");
-        System.out.println("Your final score: " + playerScore);
-        System.out.println("Time elapsed: " + secondsElapsed + " seconds");
-    }
-
-    /**
-     * Prompts the user to input the next move.
-     * The input can be a tile number, 'q' to quit, or 'r' to restart the game.
-     *
-     * @return the user's input as a String
-     */
-    @Override
-    public String prompt() {
-        System.out.println("Enter the tile number to flip, "
-                + "'q' to quit, or 'r' to restart: ");
-
-        return scanner.nextLine();
-    }
-
-    /**
      * Displays the current game board to the terminal.
      * Flipped tiles show their symbols, while unflipped tiles are represented with their index.
      *
@@ -78,6 +43,41 @@ class MemoryGameTextView implements MemoryGameView {
             }
         }
         System.out.println("\n---------------------------");
+    }
+
+    /**
+     * Prompts the user to input the next move.
+     * The input can be a tile number, 'q' to quit, or 'r' to restart the game.
+     *
+     * @return the user's input as a String
+     */
+    @Override
+    public String prompt() {
+        System.out.println("Enter the tile number to flip, "
+                + "'q' to quit, or 'r' to restart: ");
+
+        return scanner.nextLine();
+    }
+
+    /**
+     * Displays a congratulatory message to the player upon successfully finishing the game.
+     *
+     * @param playerScore    the player's final score
+     * @param secondsElapsed the time taken to complete the game in seconds
+     */
+    @Override
+    public void successGameOver(int playerScore, int secondsElapsed) {
+        System.out.println("Congratulations! You found all the matches.");
+        System.out.println("Your final score: " + playerScore);
+        System.out.println("Time elapsed: " + secondsElapsed + " seconds");
+    }
+
+    /**
+     * Closes the scanner to release system resources.
+     */
+    @Override
+    public void close() {
+        scanner.close();
     }
 
     /**

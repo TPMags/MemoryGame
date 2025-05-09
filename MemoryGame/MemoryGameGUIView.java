@@ -1,16 +1,16 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.*;
 
 /**
  * A graphical user interface (GUI) implementation of the Memory Game view.
  * Displays the game board using Swing components and handles user input via buttons.
  */
 public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionListener {
-    private JPanel boardPanel;
-    private JTextArea promptArea;
+    private final JPanel boardPanel;
+    private final JTextArea promptArea;
     private String latestCommand = "";
 
     /**

@@ -13,12 +13,11 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
     private final JTextArea promptArea;
     private String latestCommand = "";
 
-    private int rowDim;
+    private final int rowDim;
 
     /**
      * Constructs the GUI view for the Memory Game, setting up the frame,
      * layout, buttons, and board.
-     *
      */
     public MemoryGameGUIView(int rowDim) {
         this.rowDim = rowDim;

@@ -11,7 +11,7 @@ class MemoryGameController {
     private static Timer timer;
     private final MemoryGameView view;
     private final MemoryGameModel model;
-    private int numberOfPairs;
+    private final int numberOfPairs;
 
     /**
      * Constructs the game controller.

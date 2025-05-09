@@ -18,22 +18,22 @@ public class Main {
 
             if (choice == 1) {
                 view = new MemoryGameTextView(3);
-                controller = new MemoryGameController(model, view,9);
+                controller = new MemoryGameController(model, view, 9);
                 controller.play();
             } else if (choice == 2) {
                 view = new MemoryGameGUIView(3);
-                controller = new MemoryGameController(model, view,9);
+                controller = new MemoryGameController(model, view, 9);
                 controller.play();
             } else {
                 System.out.println("Invalid choice. Defaulting to Text View.");
                 view = new MemoryGameTextView(3);
-                controller = new MemoryGameController(model, view,9);
+                controller = new MemoryGameController(model, view, 9);
                 controller.play();
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid choice. Defaulting to Text View.");
             view = new MemoryGameTextView(3);
-            controller = new MemoryGameController(model, view,9);
+            controller = new MemoryGameController(model, view, 9);
             controller.play();
         } finally {
             scanner.close();

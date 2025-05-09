@@ -8,15 +8,12 @@ import java.util.Scanner;
 class MemoryGameTextView implements MemoryGameView {
 
     private final Scanner scanner;
-    private int rowDim;
 
     /**
      * Constructs a new MemoryGameTextView and initializes the Scanner for user input.
-     *
      */
     public MemoryGameTextView(int rowDim) {
         this.scanner = new Scanner(System.in);
-        this.rowDim = rowDim;
     }
 
     /**

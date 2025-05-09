@@ -119,6 +119,10 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
      */
     @Override
     public void displayMessage(String message) {
+        if(message.equals("Invalid input. Please enter a tile number.")){
+            // This is not a message we will display, since we do not use a scanner.
+            return;
+        }
         promptArea.setText(message + "\n");
     }
 
@@ -131,6 +135,6 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
     @Override
     public void actionPerformed(ActionEvent e) {
         latestCommand = e.getActionCommand();
-        promptArea.setText("Command: " + latestCommand); // For debugging
+//        promptArea.setText("Command: " + latestCommand); // For debugging
     }
 }

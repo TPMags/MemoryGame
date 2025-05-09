@@ -169,7 +169,7 @@ class MemoryGameModel {
                 } else {
                     // Incorrect match
                     if (t.isSeen() && tile.isSeen()) { // Decrease their score for comparing a seen cards
-                        increasePlayerScore(-100);
+                        increasePlayerScore(-10);
                     }
                     return false;
                 }

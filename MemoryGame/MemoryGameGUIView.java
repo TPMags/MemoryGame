@@ -21,6 +21,8 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
      *
      */
     public MemoryGameGUIView(int rowDim) {
+        this.rowDim = rowDim;
+
         setTitle("Memory Game");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +53,6 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
 
         setVisible(true);
 
-        this.rowDim = rowDim;
     }
 
     /**

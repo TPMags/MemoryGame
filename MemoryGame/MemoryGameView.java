@@ -22,9 +22,8 @@ interface MemoryGameView {
      */
     void successGameOver(int playerScore, int secondsElapsed);
 
-
     /**
-     * closes input getter
+     * Closes the view and any resources it uses
      */
     void close();
 

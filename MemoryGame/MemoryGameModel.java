@@ -50,6 +50,7 @@ class MemoryGameModel {
         matchesFound = 0;
         secondsElapsed = 0;
         tiles.forEach(t -> t.setFlipped(false));
+        resetPlayerScore();
     }
 
     /**
@@ -141,6 +142,9 @@ class MemoryGameModel {
         if (!tile.isFlipped() && flipsRemaining > 0) {
             tile.setFlipped(true);
             flipsRemaining--;
+            if (flipsRemaining == 1) {
+                tile.setSeen(true); // Set the card to seen
+            }
         }
     }
 
@@ -152,17 +156,26 @@ class MemoryGameModel {
      * @return {@code true} if a match is found, {@code false} otherwise
      */
     public boolean checkForMatch(Tile tile) {
-        int count = 0;
         for (Tile t : tiles) {
-            if (t.equals(tile)) continue;
-            if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
-                t.setMatched(true);
-                tile.setMatched(true);
-                increaseMatchesFound();
-                count++;
+            if (t.equals(tile)) continue; // Prevent self-checking
+            if (t.isFlipped()) {
+                // This is the one other card that is flipped
+                if (t.getSymbol() == tile.getSymbol()) {
+                    t.setMatched(true);
+                    tile.setMatched(true);
+                    increaseMatchesFound();
+                    increasePlayerScore(100);
+                    return true;
+                } else {
+                    // Incorrect match
+                    if (t.isSeen() && tile.isSeen()) { // Decrease their score for comparing a seen cards
+                        increasePlayerScore(-100);
+                    }
+                    return false;
+                }
             }
         }
-        return count == 2;
+        return false;
     }
 
     /**
@@ -186,5 +199,34 @@ class MemoryGameModel {
                 tile.setFlipped(true);
             }
         }
+    }
+
+    /**
+     * Get the current player score
+     *
+     * @return Player score
+     */
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    /**
+     * Reset the current player score to zero
+     */
+    public void resetPlayerScore() {
+        this.playerScore = 0;
+    }
+
+    /**
+     * Increase the player score by a certain amount
+     * (can be negative)
+     *
+     * @param amount Amount to increase player score
+     */
+    public void increasePlayerScore(int amount) {
+        // Prevent score lower than zero.
+        //        if(this.playerScore + amount < 0){ return; }
+        System.out.println("increased player score by " + amount);
+        this.playerScore += amount;
     }
 }

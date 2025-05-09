@@ -11,17 +11,20 @@ class MemoryGameController {
     private static Timer timer;
     private final MemoryGameView view;
     private final MemoryGameModel model;
+    private final int numberOfPairs;
 
     /**
      * Constructs the game controller.
      *
      * @param model the model component representing game logic and state
      * @param view  the view component responsible for user interaction
+     * @param pairs Number of pairs needed
      */
-    public MemoryGameController(MemoryGameModel model, MemoryGameView view) {
+    public MemoryGameController(MemoryGameModel model, MemoryGameView view, int pairs) {
         this.model = model;
         this.view = view;
-        model.initializeTiles(6);
+        this.numberOfPairs = pairs;
+        model.initializeTiles(pairs);
     }
 
     /**
@@ -38,7 +41,7 @@ class MemoryGameController {
     private void restartGame() {
         timer.cancel();
         model.resetGameState();
-        model.initializeTiles(6);
+        model.initializeTiles(numberOfPairs);
         startTimer();
     }
 

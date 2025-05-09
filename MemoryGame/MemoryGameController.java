@@ -71,7 +71,7 @@ class MemoryGameController {
      */
     public void play() {
         startTimer();
-        while (model.getMatchesFound() < model.getNumberOfTiles() / 2) {
+        while (model.getMatchesFound() < model.getNumberOfTiles()) {
             view.displayBoard(model.getTiles());
             String input = view.prompt();
 

@@ -36,7 +36,7 @@ class MemoryGameTextView implements MemoryGameView {
                 System.out.print(i / 6 + "  ");
             }
             Tile tile = tiles.get(i);
-            if (tile.isFlipped()) {
+            if (tile.isFlipped() || tile.isMatched()) {
                 System.out.print(tile.getSymbol() + "\t");
             } else {
                 System.out.print("[" + i + "]\t");
@@ -67,7 +67,6 @@ class MemoryGameTextView implements MemoryGameView {
      */
     @Override
     public void successGameOver(int playerScore, int secondsElapsed) {
-        System.out.println("Congratulations! You found all the matches.");
         System.out.println("Your final score: " + playerScore);
         System.out.println("Time elapsed: " + secondsElapsed + " seconds");
     }

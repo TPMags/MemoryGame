@@ -10,7 +10,7 @@ class MemoryGameModel {
     private final List<Tile> tiles;
     private final int gameDuration;
     private int flipsRemaining;
-    private int playerScore;    // TODO: Add player score
+    private int playerScore;
     private int matchesFound;
     private int secondsElapsed;
 
@@ -169,7 +169,7 @@ class MemoryGameModel {
                 } else {
                     // Incorrect match
                     if (t.isSeen() && tile.isSeen()) { // Decrease their score for comparing a seen cards
-                        increasePlayerScore(-100);
+                        increasePlayerScore(-10);
                     }
                     return false;
                 }
@@ -191,13 +191,7 @@ class MemoryGameModel {
      */
     public void resetFlippedTiles() {
         for (Tile tile : tiles) {
-            tile.setFlipped(false);
-        }
-
-        for (Tile tile : tiles) {
-            if (tile.isMatched()) {
-                tile.setFlipped(true);
-            }
+           tile.setFlipped(false);
         }
     }
 
@@ -226,7 +220,6 @@ class MemoryGameModel {
     public void increasePlayerScore(int amount) {
         // Prevent score lower than zero.
         //        if(this.playerScore + amount < 0){ return; }
-        System.out.println("increased player score by " + amount);
         this.playerScore += amount;
     }
 }

@@ -1,8 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.*;
 
 /**
  * A graphical user interface (GUI) implementation of the Memory Game view.
@@ -76,7 +76,7 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
         for (int i = 0; i < tiles.size(); i++) {
             JButton button = (JButton) boardPanel.getComponent(i);
             String symbol = String.valueOf(tiles.get(i).getSymbol());
-            button.setText(tiles.get(i).isFlipped() ? symbol : "?");
+            button.setText(tiles.get(i).isFlipped() || tiles.get(i).isMatched() ? symbol : "?");
         }
     }
 
@@ -101,7 +101,7 @@ public class MemoryGameGUIView extends JFrame implements MemoryGameView, ActionL
      */
     @Override
     public void successGameOver(int playerScore, int secondsElapsed) {
-        JOptionPane.showMessageDialog(this, "Congratulations! You found all the matches.\nYour final score: " + playerScore + "\nTime elapsed: " + secondsElapsed + " seconds");
+        JOptionPane.showMessageDialog(this, "Your final score: " + playerScore + "\nTime elapsed: " + secondsElapsed + " seconds");
     }
 
     /**

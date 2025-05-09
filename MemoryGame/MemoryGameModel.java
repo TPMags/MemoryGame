@@ -191,11 +191,7 @@ class MemoryGameModel {
      */
     public void resetFlippedTiles() {
         for (Tile tile : tiles) {
-            if (tile.isMatched()) {
-                tile.setFlipped(true);
-            } else {
-                tile.setFlipped(false);
-            }
+            tile.setFlipped(tile.isMatched());
         }
     }
 

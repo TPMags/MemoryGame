@@ -12,7 +12,7 @@ class MemoryGameTextView implements MemoryGameView {
     /**
      * Constructs a new MemoryGameTextView and initializes the Scanner for user input.
      */
-    public MemoryGameTextView(int rowDim) {
+    public MemoryGameTextView() {
         this.scanner = new Scanner(System.in);
     }
 

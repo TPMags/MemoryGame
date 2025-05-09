@@ -51,6 +51,7 @@ class MemoryGameModel {
 
     /**
      * Get a list of all tiles.
+     *
      * @return Each tile
      */
     public List<Tile> getTiles() {
@@ -59,6 +60,7 @@ class MemoryGameModel {
 
     /**
      * Returns a tile at a specific index.
+     *
      * @param index
      * @return Tile
      */
@@ -68,6 +70,7 @@ class MemoryGameModel {
 
     /**
      * Gets the total number of tiles on the board
+     *
      * @return int
      */
     public int getNumberOfTiles() {
@@ -84,6 +87,7 @@ class MemoryGameModel {
 
     /**
      * Gets all of the matches found in the current game
+     *
      * @return the current number of matches found
      */
     public int getMatchesFound() {
@@ -92,6 +96,7 @@ class MemoryGameModel {
 
     /**
      * Gets how much time has passed in the game
+     *
      * @return secondsElapsed
      */
     public int getElapsedTime() {
@@ -100,6 +105,7 @@ class MemoryGameModel {
 
     /**
      * Gets the set game duration
+     *
      * @return gameDuration
      */
     public int getGameDuration() {
@@ -113,11 +119,11 @@ class MemoryGameModel {
         secondsElapsed++;
     }
 
-    /** 
-     * @return remaining flips in the turn. 
+    /**
+     * @return remaining flips in the turn.
      */
-    public int getFlipsRemaining() { 
-        return flipsRemaining; 
+    public int getFlipsRemaining() {
+        return flipsRemaining;
     }
 
     /**
@@ -129,6 +135,7 @@ class MemoryGameModel {
 
     /**
      * Attempts to flip a tile at a specific index.
+     *
      * @param index tile index to flip.
      */
     public void flipTile(int index) {
@@ -141,12 +148,15 @@ class MemoryGameModel {
 
     /**
      * Checks whether two flipped tiles match and updates score if they do.
+     *
      * @return true if a match is found.
      */
     public boolean checkForMatch(Tile tile) {
         int count = 0;
         for (Tile t : tiles) {
-            if(t.equals(tile)){continue;}
+            if (t.equals(tile)) {
+                continue;
+            }
             if (t.isFlipped() && t.getSymbol() == tile.getSymbol()) {
                 t.setMatched(true);
                 tile.setMatched(true);
@@ -159,15 +169,16 @@ class MemoryGameModel {
         return count == 2;
     }
 
-    /** 
-     * Resets flip counter for next turn. 
+    /**
+     * Resets flip counter for next turn.
      */
     public void resetFlips() {
         flipsRemaining = 2;
     }
 
-    /** 
-     * Resets all flipped tiles to hidden state. 
+    /**
+     * Resets all flipped tiles to hidden state,
+     * except matched tiles
      */
     public void resetFlippedTiles() {
         System.out.println("reseting tiles!");
@@ -177,13 +188,13 @@ class MemoryGameModel {
         //     }
         // }
 
-        for(Tile tile : tiles){
+        for (Tile tile : tiles) {
             tile.setFlipped(false);
         }
 
-        for(Tile tile : tiles){
+        for (Tile tile : tiles) {
             System.out.println(tiles.indexOf(tile) + " " + tile.isMatched());
-            if(tile.isMatched() == true){
+            if (tile.isMatched() == true) {
                 tile.setFlipped(true);
             }
         }

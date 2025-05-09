@@ -14,6 +14,7 @@ class Tile {
 
     /**
      * Returns the underside of the card
+     *
      * @return symbol
      */
     public char getSymbol() {
@@ -22,6 +23,7 @@ class Tile {
 
     /**
      * Checks to see if the card has been flipped or not.
+     *
      * @return flipped
      */
     public boolean isFlipped() {
@@ -29,7 +31,17 @@ class Tile {
     }
 
     /**
+     * Sets the flipped state to either true or false
+     *
+     * @param flipped
+     */
+    public void setFlipped(boolean flipped) {
+        this.flipped = flipped;
+    }
+
+    /**
      * lets the program know if the tile is matched or not.
+     *
      * @return matched
      */
     public boolean isMatched() {
@@ -38,17 +50,10 @@ class Tile {
 
     /**
      * Sets the tile to matched.
+     *
      * @param matched
      */
     public void setMatched(boolean matched) {
         this.matched = matched;
-    }
-
-    /**
-     * Sets the flipped state to either true or false
-     * @param flipped
-     */
-    public void setFlipped(boolean flipped) {
-        this.flipped = flipped;
     }
 }

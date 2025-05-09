@@ -15,7 +15,7 @@ public class Main {
 
         try {
             int choice = scanner.nextInt();
-            
+
             if (choice == 1) {
                 view = new MemoryGameTextView();
                 controller = new MemoryGameController(model, view);
@@ -30,7 +30,7 @@ public class Main {
                 controller = new MemoryGameController(model, view);
                 controller.play();
             }
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Invalid choice. Defaulting to Text View.");
             view = new MemoryGameTextView();
             controller = new MemoryGameController(model, view);

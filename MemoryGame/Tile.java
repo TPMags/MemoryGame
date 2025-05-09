@@ -62,6 +62,7 @@ public class Tile {
     /**
      * [UNDOCUMENTED]
      * Gets the seen state of this tile
+     *
      * @return True if seen, false otherwise
      */
     public boolean isSeen() {
@@ -71,7 +72,8 @@ public class Tile {
     /**
      * [UNDOCUMENTED]
      * Sets the seen state of this tile.
-     * @param seen
+     *
+     * @param seen True if has been seen, false otherwise
      */
     public void setSeen(boolean seen) {
         this.seen = seen;
